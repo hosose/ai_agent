@@ -88,3 +88,46 @@ TOOL RESULT : [{'type': 'reasoning_content', 'reasoning_content': {'text': '', '
 
  [{'type': 'reasoning_content', 'reasoning_content': {'text': '', 'signature': 'Eq0CCnkIEhABGAIqQJ2+IB/0hnIdyZ1POtsJ0mKxirjiNHY/M7qlWD//HP1xHqzlmRYCMGYRngetc/SUDJ2rKsN/TGw3pegLrAT/lzMyDmNsYXVkZS1zYWZmcm9uOABCCHRoaW5raW5nWgw4Mjc5MTM2MTc2MzWoAc2B/NUGEgw0RKGNZ2PisedJLFgaDB8fljUNf3S8EihfGiIwX1ZH7k/ujHEhxCtIkdlms8BBYgG4exqPPdO0U92CdE3YCaKdF0xA1OlXk0znmf0gKmIEpkVOfr3y6oqrDaKqoEGU+uB9kQcb821mV/kKnKuf3bl7Z/tNcW3AsxxbAf36kDLw6s+XpBKre9Rg8k0YkKhIUdkLHRATrtahykRGvvS6IBb7KTC2jb4I3F7PfcfXMdk4pRgB'}}, {'type': 'text', 'text': '위안화(CNY) 관련해서는 안내드릴 수 있는 사항이 제한적입니다.\n\n현재 환율 조회 도구는 **USD, EUR, JPY 대비 KRW**만 지원하며, **CNY(위안화)는 지원되지 않습니다.**\n\n필요하시다면 아래 중 하나로 안내드릴 수 있습니다:\n- USD/KRW, EUR/KRW, JPY/KRW 환율 조회\n- 외부 환율 정보 소스를 별도로 확인하시는 방법 안내\n\n원하시는 환율이 있으신가요?'}]
 ```
+
+
+
+```
+python -m steps.step15_mcp
+---
+    await run(
+        "2026-09-01 ~ 2026-09-05 기간내에 환불 현황을 확인하고, "
+        "해당 비용을 원화와 달러 2개 통화로 알려주고, " 
+        "사내 환불 정책을 확인해서 "
+        "내가 선호하는 보고 방식으로 정리해줘."
+    )
+---    
+MCP 서버 연결 완료
+TOOL RESULT : 2026-09-01 ~ 2026-09-05 기간내에 환불 현황을 확인하고, 해당 비용을 원화와 달러 2개 통화로 알려주고, 사내 환불 정책을 확인해서 내가 선호하는 보고 방식으로 정리해줘.
+TOOL CALLS  : ['recall_user_memory', 'refund_summary', 'get_exchange_rate', 'search_company_policy']
+TOOL RESULT : [{'type': 'reasoning_content', 'reasoning_content': {'text': '', 'signature': 'EqsECnkIEhABGAIqQGYbMQcm8ruQ7XoQr0NOGhXfMwViOSXJLh+ooUnbZr4ddk/jXY1wzfNm82ftL97WifsP/0Wfvz+JWqtHWYz2viEyDmNsYXVkZS1zYWZmcm9uOABCCHRoaW5raW5nWgw4Mjc5MTM2MTc2MzWoAfyX/NUGEgyFwLT5gLGi1Uiby04aDP+57n0qllMWIdlUSCIwlAEDNKsXTQtEG3KEP9zIMtOfFu+vfpBBouyWC/05kam3kFk8CiiVEQcpMHfYduCeKt8CPBgN18JEfnbfOa+8BbLAqTkj5hV4Hcrv3iZ6PRojIPVVvuXZHdICCVFJzIw5Ao95Bw4bjq8Jzrc1oLBk7qgY4+OYsGrM1WiSqBj20FpB58kNx6jA+IDpweUMVOs7zouyp9k/6JKgivVU4ZqKxEOHvntZE7EIHU7rMixBS1NiQ/mCcPPJegDtR4o8oF46hvU8wFn+gQJXhKWEHTPDGWehuZeGWqFm+WXesd75qOTDDJhsQtjPAcwtpR0L51Dh8zM4lJFUZDJ+9QIKgtf5LguPs9EYL0z6e2C6tnJMJYAgknDEgW9nLXUozxnnI/owSmGf6lVXZMGoQGd8ATugtg3Awq6qAPGUh2DmCCUn8lX0MH18kjE2l8gwY7V8ozggQoTv8358WQNBQ8JJ+rOszAoJWuzkRofpf2BimknPEcB7Al139cap0/SYx7DB9gznYexHTxwYT4LqDWGUIMmWNpU0GAE='}}, {'type': 'text', 'text': '사용자의 선호 보고 방식을 먼저 확인하고, 환불 현황·환율·환불 정책을 함께 조회하겠습니다.'}, {'type': 'tool_use', 'name': 'recall_user_memory', 'input': {'query': '보고서 작성 방식 선호, 리포트 포맷 선호'}, 'id': 'tooluse_CLRAuSKDQpMbKHx12lpQLN'}, {'type': 'tool_use', 'name': 'refund_summary', 'input': {'start_date': '2026-09-01', 'end_date': '2026-09-05'}, 'id': 'tooluse_pnEnVfK1HVu5VH6sYvJN3I'}, {'type': 'tool_use', 'name': 'get_exchange_rate', 'input': {'base': 'USD', 'quote': 'KRW'}, 'id': 'tooluse_nhYnBEgFWJHc451WnpRyzi'}, {'type': 'tool_use', 'name': 'search_company_policy', 'input': {'query': '환불 정책 및 처리 기준', 'department': 'CS'}, 'id': 'tooluse_94Un29tqw3FYv3IDnWhFzc'}]
+TOOL RESULT : [preference score=0.426 importance=0.8] 보고서 작성 시 매출 요약보다 CS 이슈 및 환불 현황을 먼저 제시하는 것을 선호함 (보고 순서: CS/환불 → 매출)
+[preference score=0.288 importance=0.8] 답변은 짧은 bullet 형태로 제공하는 것을 선호함
+[preference score=0.128 importance=0.9] 환불 요청 처리 정책: 5만원 이상 환불 요청은 팀장 승인을 받은 후 처리한다.
+TOOL RESULT : refund_count=1, refund_amount=99000.00, range=2026-09-01~2026-09-05, reasons=product_defect
+TOOL RESULT : {'base': 'USD', 'quote': 'KRW', 'rate': 1364.3, 'meta': 'dummy-exchange-rate'}
+TOOL RESULT : [source=CS-REFUND-2026 | hybrid=0.464]
+# 고객 반품 및 환불 정책
+
+[source=CS-REFUND-2026 | hybrid=0.401]
+환불은 반품 상품이 물류센터에 도착하여 검수된 이후 진행한다. 검수 과정에서는 상품의 사용 여부, 구성품 누락 여부, 훼손 여부와 반품 사유를 확인한다. 정상 반품으로 확인된 경우 원결제 수단을 기준으로 환불하며, 카드사나 결제대행사의 처리 일정에 따라 실제 환불 완료 시점에는 차이가 발생할 수 있다.
+
+[source=CS-REFUND-2026 | hybrid=0.265]
+고객센터 담당자는 반품 제한 또는 환불 거절이 필요한 경우 그 사유를 고객에게 명확하게 안내해야 한다. 판단이 어려운 품질 문제나 반복 분쟁 건은 임의로 처리하지 않고 CS 책임자에게 이관한다. 동일 유형의 문의가 반복될 경우 사례와 처리 결과를 기록하여 향후 정책 개선과 상담 기준 정비에 활용한다.
+
+[source=CS-REFUND-2026 | hybrid=0.197]
+상품 자체의 제조상 하자나 기능상 문제가 확인되면 상품 수령 후 30일 이내 교환 또는 환불을 신청할 수 있다. 이 경우 고객에게 귀책사유가 없는 것으로 판단되면 회수 배송비와 교환 상품의 재배송 비용은 회사가 부담한다. 필요한 경우 고객센터는 사진, 동영상 또는 제품 상태 확인 자료를 요청할 수 있다.
+
+[source=CS-REFUND-2026 | hybrid=0.182]
+주문한 상품과 다른 상품이 배송되었거나 수량이 잘못 배송된 경우 고객은 상품 수령 후 가능한 한 신속하게 고객센터에 접수한다. 오배송이 확인되면 회사가 회수 및 재배송 비용을 부담하며, 고객이 환불을 원하는 경우 회수 완료 후 결제 취소 절차를 진행한다.
+TOOL RESULT : [{'type': 'reasoning_content', 'reasoning_content': {'text': '', 'signature': 'ErsDCnkIEhABGAIqQKPENn2RPGODfwkg7ZFig9MeC0xgch2gq0ia7HuRE724MeKJQTmUUo+KADs3+jnn/oQTs2xGzUnjCZVnvT1qJeQyDmNsYXVkZS1zYWZmcm9uOABCCHRoaW5raW5nWgw4Mjc5MTM2MTc2MzWoAYaY/NUGEgwE4ornHXqs39zpi+AaDPLPr2yXwP6/UU0DISIwopEpP3YEG+Vq6IXmO0L4XVwf+LyVg2F+FSm2D/C5psIWnVDNsjC6PhAkQZHnxBF8Ku8BwtTcWyaArXrY4N4DleuDePclWj/5kbnpy3Kbmw6rS1AKKePDyavYMUeE4EmZKsqLyE7MDDgd8iElya87IxcaQfOrvrSPE/563s0S0iY+SAc67zsyp+76C2gPdPLCr0K6a6tvAyhUfDeF6JU1bqtdXDkrJ0YKQUPsluajHNCg5RitrRoHZKb8AeDG2LxDSwlX8kCQBg2ZHTsKe0oBLCXlMp+NNpRj4DVYqffLaQht3f3kMSas5MeHlmIdnc3vrqyjCOyVGaDlmb26TjG0GDiCZcKcxVRgnI0EOXzFEH4lXIl8HC9l3l15fpSEv7XjKzwYAQ=='}}, {'type': 'text', 'text': '**📌 환불 현황 (2026-09-01 ~ 2026-09-05)**\n\n- 환불 건수: 1건\n- 환불 사유: 제품 불량(product_defect)\n- 환불 금액: ₩99,000 (KRW) / **$72.59 USD** (환율 1,364.3원/$ 기준, 참고용 환율)\n\n**💳 승인 필요 여부**\n- 금액이 ₩50,000 이상 → **팀장 승인 필요** (내부 기준)\n\n**📄 관련 사내 정책 (CS-REFUND-2026)**\n- 제조상 하자·기능 문제는 수령 후 **30일 이내** 교환/환불 가능, 고객 귀책 없을 시 회수·재배송비 **회사 부담**\n- 환불은 반품 상품의 **검수 완료 후** 진행, 원결제수단 기준 환불\n- 판단 애매한 품질 분쟁은 CS 책임자에게 이관\n\n필요하시면 매출 요약도 이어서 정리해드릴까요?'}]
+++++++++++++++++++++++++++++++
+[최종답변]
+
+ [{'type': 'reasoning_content', 'reasoning_content': {'text': '', 'signature': 'ErsDCnkIEhABGAIqQKPENn2RPGODfwkg7ZFig9MeC0xgch2gq0ia7HuRE724MeKJQTmUUo+KADs3+jnn/oQTs2xGzUnjCZVnvT1qJeQyDmNsYXVkZS1zYWZmcm9uOABCCHRoaW5raW5nWgw4Mjc5MTM2MTc2MzWoAYaY/NUGEgwE4ornHXqs39zpi+AaDPLPr2yXwP6/UU0DISIwopEpP3YEG+Vq6IXmO0L4XVwf+LyVg2F+FSm2D/C5psIWnVDNsjC6PhAkQZHnxBF8Ku8BwtTcWyaArXrY4N4DleuDePclWj/5kbnpy3Kbmw6rS1AKKePDyavYMUeE4EmZKsqLyE7MDDgd8iElya87IxcaQfOrvrSPE/563s0S0iY+SAc67zsyp+76C2gPdPLCr0K6a6tvAyhUfDeF6JU1bqtdXDkrJ0YKQUPsluajHNCg5RitrRoHZKb8AeDG2LxDSwlX8kCQBg2ZHTsKe0oBLCXlMp+NNpRj4DVYqffLaQht3f3kMSas5MeHlmIdnc3vrqyjCOyVGaDlmb26TjG0GDiCZcKcxVRgnI0EOXzFEH4lXIl8HC9l3l15fpSEv7XjKzwYAQ=='}}, {'type': 'text', 'text': '**📌 환불 현황 (2026-09-01 ~ 2026-09-05)**\n\n- 환불 건수: 1건\n- 환불 사유: 제품 불량(product_defect)\n- 환불 금액: ₩99,000 (KRW) / **$72.59 USD** (환율 1,364.3원/$ 기준, 참고용 환율)\n\n**💳 승인 필요 여부**\n- 금액이 ₩50,000 이상 → **팀장 승인 필요** (내부 기준)\n\n**📄 관련 사내 정책 (CS-REFUND-2026)**\n- 제조상 하자·기능 문제는 수령 후 **30일 이내** 교환/환불 가능, 고객 귀책 없을 시 회수·재배송비 **회사 부담**\n- 환불은 반품 상품의 **검수 완료 후** 진행, 원결제수단 기준 환불\n- 판단 애매한 품질 분쟁은 CS 책임자에게 이관\n\n필요하시면 매출 요약도 이어서 정리해드릴까요?'}]
+++++++++++++++++++++++++++++++
+```
