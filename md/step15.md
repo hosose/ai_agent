@@ -58,4 +58,33 @@ L steps
 # 실행
 ```
 python -m steps.step15_mcp
+---
+MCP 서버 연결 완료
+TOOL RESULT : 위완화 대비 원화 환율을 확인해.
+TOOL CALLS  : ['get_exchange_rate']
+TOOL RESULT : [{'type': 'reasoning_content', 'reasoning_content': {'text': '', 'signature': 'Eu8BCnkIEhABGAIqQAv4Xs3Xm0Hl5FUqfzTPRaCASF3NHAItm8kgYliovPTaRvXXsUnUtwIHCkpySfjOksA5JhVJnp/dndGVeGS2B8oyDmNsYXVkZS1zYWZmcm9uOABCCHRoaW5raW5nWgw4Mjc5MTM2MTc2MzWoAY+B/NUGEgxF8Qp76nck8wYyY8waDCiLnRlFjaDCXjOMmyIwP79SXUnxubelWTiu2xFyVE7eVUOF50fhdCTatVcOvCOIFasrSvWDIXlLLgidFAn2KiS5fmjhmDSFqgLtyGemnrptXVEO5Vb+/QUP3Uh/8EfcnR/2N8MYAQ=='}}, {'type': 'tool_use', 'name': 'get_exchange_rate', 'input': {'base': 'JPY', 'quote': 'KRW'}, 'id': 'tooluse_upy1gbYjk282P9qREDW5AH'}]
+TOOL RESULT : {'base': 'JPY', 'quote': 'KRW', 'rate': 863.24, 'meta': 'dummy-exchange-rate'}
+TOOL RESULT : **엔화(JPY) 대비 원화(KRW) 환율 조회 결과**
+
+- 기준: JPY → KRW
+- 환율: **1 JPY = 863.24 KRW**
+
+⚠️ 참고: 해당 환율 정보는 실시간 환율이 아니며, 더미(dummy) 데이터 기반 수치입니다. 실제 환전/정산 업무에는 실시간 환율 확인이 필요합니다.
+++++++++++++++++++++++++++++++
+[최종답변]
+
+ **엔화(JPY) 대비 원화(KRW) 환율 조회 결과**
+
+- 기준: JPY → KRW
+- 환율: **1 JPY = 863.24 KRW**
+
+⚠️ 참고: 해당 환율 정보는 실시간 환율이 아니며, 더미(dummy) 데이터 기반 수치입니다. 실제 환전/정산 업무에는 실시간 환율 확인이 필요합니다.
+++++++++++++++++++++++++++++++
+(agent) PS C:\Users\NT551_11TH\Desktop\workspace\ai_agent> python -m steps.step15_mcp
+TOOL RESULT : 위안화 대비 원화 환율을 확인해.
+TOOL RESULT : [{'type': 'reasoning_content', 'reasoning_content': {'text': '', 'signature': 'Eq0CCnkIEhABGAIqQJ2+IB/0hnIdyZ1POtsJ0mKxirjiNHY/M7qlWD//HP1xHqzlmRYCMGYRngetc/SUDJ2rKsN/TGw3pegLrAT/lzMyDmNsYXVkZS1zYWZmcm9uOABCCHRoaW5raW5nWgw4Mjc5MTM2MTc2MzWoAc2B/NUGEgw0RKGNZ2PisedJLFgaDB8fljUNf3S8EihfGiIwX1ZH7k/ujHEhxCtIkdlms8BBYgG4exqPPdO0U92CdE3YCaKdF0xA1OlXk0znmf0gKmIEpkVOfr3y6oqrDaKqoEGU+uB9kQcb821mV/kKnKuf3bl7Z/tNcW3AsxxbAf36kDLw6s+XpBKre9Rg8k0YkKhIUdkLHRATrtahykRGvvS6IBb7KTC2jb4I3F7PfcfXMdk4pRgB'}}, {'type': 'text', 'text': '위안화(CNY) 관련해서는 안내드릴 수 있는 사항이 제한적입니다.\n\n현재 환율 조회 도구는 **USD, EUR, JPY 대비 KRW**만 지원하며, **CNY(위안화)는 지원되지 않습니다.**\n\n필요하시다면 아래 중 하나로 안내드릴 수 있습니다:\n- USD/KRW, EUR/KRW, JPY/KRW 환율 조회\n- 외부 환율 정보 소스를 별도로 확인하시는 방법 안내\n\n원하시는 환율이 있으신가요?'}]
+++++++++++++++++++++++++++++++
+[최종답변]
+
+ [{'type': 'reasoning_content', 'reasoning_content': {'text': '', 'signature': 'Eq0CCnkIEhABGAIqQJ2+IB/0hnIdyZ1POtsJ0mKxirjiNHY/M7qlWD//HP1xHqzlmRYCMGYRngetc/SUDJ2rKsN/TGw3pegLrAT/lzMyDmNsYXVkZS1zYWZmcm9uOABCCHRoaW5raW5nWgw4Mjc5MTM2MTc2MzWoAc2B/NUGEgw0RKGNZ2PisedJLFgaDB8fljUNf3S8EihfGiIwX1ZH7k/ujHEhxCtIkdlms8BBYgG4exqPPdO0U92CdE3YCaKdF0xA1OlXk0znmf0gKmIEpkVOfr3y6oqrDaKqoEGU+uB9kQcb821mV/kKnKuf3bl7Z/tNcW3AsxxbAf36kDLw6s+XpBKre9Rg8k0YkKhIUdkLHRATrtahykRGvvS6IBb7KTC2jb4I3F7PfcfXMdk4pRgB'}}, {'type': 'text', 'text': '위안화(CNY) 관련해서는 안내드릴 수 있는 사항이 제한적입니다.\n\n현재 환율 조회 도구는 **USD, EUR, JPY 대비 KRW**만 지원하며, **CNY(위안화)는 지원되지 않습니다.**\n\n필요하시다면 아래 중 하나로 안내드릴 수 있습니다:\n- USD/KRW, EUR/KRW, JPY/KRW 환율 조회\n- 외부 환율 정보 소스를 별도로 확인하시는 방법 안내\n\n원하시는 환율이 있으신가요?'}]
 ```
