@@ -114,6 +114,7 @@ def build_graph():
         # JSON문자열 => AgentResponse 객체로 세팅
         final_ar = AgentResponse.model_validate_json( content )
 
+        # 상태객체에 final 키에 값을 부여한것임
         return {"final":final_ar}
     
     # 3-1. 그래프 생성
