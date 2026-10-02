@@ -49,6 +49,8 @@ L mcp_servers
 L app
     L tools
         L mcp_tools.py      : MCP Client 역활, 랭그래프상 도구로 등록 -> Agent에서 사용
+    L agent
+        L graph.py          : 도구 등록
 L steps
     L step15_mcp.py         : MCP 테스트용,  MCP host 포지션
 ```
