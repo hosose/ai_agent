@@ -36,7 +36,7 @@ L infra
 python -m steps.step21_agent_service
 ---
 http://localhost:8000/docs 접속
-- url 별로 테스트 진행 (프럼트 페이지 없이 사용 가능 -> 향후 slack 담당)
+- url 별로 테스트 진행 (프럼트 페이지 없이 사용 가능 -> 향후 slack/텔레그램등 기타서비스 담당)
     - /chat  : `try it out` -> 프럼프트 구성하여 질문후 execute 버튼 클릭
     - /heath : `try it out` -> execute 버튼 클릭
 ```
