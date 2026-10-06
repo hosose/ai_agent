@@ -53,5 +53,22 @@ async def run_agentic_loop(task:str, max_attempts:int=2):
             answers.append( answer )
             print( f"Q{i} 실행 완료")
 
-        # 3-2-3. 답변을 하나의 말뭉치로 구성
+        # 3-2-2-1. 답변을 하나의 말뭉치로 구성
         final_answer = "\n".join(f"Q{i+1}: {q}\nA{i+1}: {a}" for i,(q,a) in enumerate(zip(plan.subquestions, answers)))
+
+        # 3-2-3 Verify
+        ver_dict = await verifier.ainvoke(f"원래 업무를 답하기에 충분한지 검증하세요. task={task}\n{final_answer}")
+        print(f"\n[VERIFY] passed={ver_dict.passed}")
+
+        # 3-2-3-1 패스여부에 따른 반환
+        if ver_dict.passed:
+            return final_answer
+
+        # FEEDACK 구성 -> 리플랜시 사용
+        feedback = "; ".join(ver_dict.gaps)
+        print("[FEEDBACK]")
+        for gap in ver_dict.gaps:
+            print( f"- {gap}" )
+
+    # 최종응답 (최대 2회까지만 반복하고 무조건 반환)
+    return final_answer
