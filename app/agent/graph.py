@@ -20,6 +20,7 @@ from app.harness import ALLOWED_TOOLS, assert_allowed_tool, Budget
 
 # 최종 응답의 출력 형식 정의한 pydantic 모델
 from app.output import AgentResponse
+import time
 
 # 2. 툴 목록 구성
 TOOLS = [sales_summary, top_products, refund_summary, search_company_policy, remember_user_preference, recall_user_memory, get_exchange_rate]
@@ -38,6 +39,16 @@ def build_graph():
 
     # Agent 노드 -> 추론만 할것인가? 도구를 사용하여 결과를 가지고 추론을 할것인가?
     async def call_model(state:AgentState):
+        # 하네스 반영
+        started_at = state.get('started_at') or time.monotonic()
+        budget = Budget(
+            tool_rounds = state.get('tool_rounds', 0),
+            start_at    = started_at
+        )
+        # 체킹!!
+        budget.check()
+        # 하네스를 이용한 사전 점검 모두 완료. 정상적으로 에이전트 작동
+        
         # 1. 라운드 값 획득 (랭그래프내에서 순환을 몇번했는가?, LLM 추론을 몇번 했는가?) # Agent 수행 횟수
         rounds = state.get('rounds', 0)
         # 2. 라운드를 기점으로 모델 선택
@@ -49,7 +60,7 @@ def build_graph():
             [SystemMessage(content=SYSTEM_PROMPT), *state['messages']]
         )
         # 4. 추론결과, 라운드(LLM 1회 호출) + 1 하여 반환 -> state['messages']에 기록됨 => 상태관리
-        return {"messages":[response], "rounds": rounds+1}
+        return {"messages":[response], "rounds": rounds+1, "start_at":started_at}
 
     # Agent 최종 답변을 JSON으로 구조화 하는 노드
     async def format_ouptut(state:AgentState):        
