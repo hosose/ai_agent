@@ -145,6 +145,10 @@ def build_graph():
     
     # 3-2. 노드 등록 (LLM 추론, 도구 )
     graph.add_node("agent", call_model)         # LLM Agent 노드 등록
+    
+    # 하네스 노드 등록
+    graph.add_node("harness", check_harness)    # 하네스 노드 등록
+
     # handle_tool_errors : 툴 실행중에 에러 발생시 에이전트 전체를 바로 싪패시키지 않고 오류를 처리하여 agent 대응하게 할것인가?
     graph.add_node("tools", ToolNode(TOOLS, handle_tool_errors=True) )
     # 출력 포멧 처리
@@ -158,9 +162,12 @@ def build_graph():
                                 # 분기함수가 메세지 검사-> 툴 사용확인되면 툴노드이동, 아니면 포멧노드 이동
                                 route_after_agent, 
                                 {
-                                    "tools":"tools", 
+                                    "tools":"harness", # 툴노드로 이동하라고 체크=> 하네스노드로 이동 시킨
                                     "format":"format"
                                 })
+    # 하네스 노드 통과 => 툴노드 이동
+    graph.add_edge("harness","tools")
+
     # 툴 사용 이후 방향성
     graph.add_edge("tools","agent") # 툴 사용 => 에이전트 진행
 
