@@ -49,6 +49,7 @@ http://localhost:8000/docs 접속
 - 서비스
     - Agent 컨테이너 추가
 - 컨테이너 구성
+    - DATABASE_URL: postgresql://agent:agent@postgres:5432/agentlab
     ```
         docker compose up --build
     ```
