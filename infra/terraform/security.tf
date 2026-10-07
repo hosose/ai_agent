@@ -7,7 +7,7 @@ resource "aws_security_group" "ec2" {
   description = "Agent API Security Group"
   vpc_id      = aws_vpc.main.id
   # 외부에서 SG를 통하여 접근하는 트레픽 규칙
-  ingress  {
+  ingress {
     description = "FastAPI"
     # 허용할 포트 범위, 시작 포트
     from_port = 8000
@@ -19,7 +19,7 @@ resource "aws_security_group" "ec2" {
     cidr_blocks = [var.api_cidr]
   }
   # 아웃바운드
-  egress  {
+  egress {
     # 모든 포트 허용
     from_port = 0
     to_port   = 0
@@ -51,7 +51,7 @@ resource "aws_security_group" "rds" {
     security_groups = [aws_security_group.ec2.id]
   }
   # 아웃바운드
-  egress  {
+  egress {
     # 모든 포트 허용
     from_port = 0
     to_port   = 0
