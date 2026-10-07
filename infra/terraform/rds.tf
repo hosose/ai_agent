@@ -49,6 +49,27 @@ resource "aws_db_instance" "postgres" {
     # 기본 포트
     port = 5432
 
+    # 서브넷 그룹 적용
+    db_subnet_group_name = aws_db_subnet_group.main.name
+    # 보안그룹 적용
+    vpc_security_group_ids = [aws_security_group.rds]
+    # 인터넷 직접 접근 -> 허용 x, 외부 접속 차단
+    publicly_accessible = false
+
+    # 고급 설정
+    # 백업 보관 기간
+    backup_retention_period = 0
+    # 고가용성 멀티 az
+    multi_az = false
+    # 테라폼 삭제시 삭제 보호 기능
+    deletion_protection = false
+    # 삭제시 스냅샷 생성 - 생략
+    skip_final_snapshot = true
+    # 변경사항에 대해 유지보수 시간 부여? 즉시 반영
+    apply_immediately = true
+
+    
+    tags = { Name="${var.project_name}-postgres" }
 }
 
 # 접속 URL 동적 구성  SSM SecureString으로 저장
