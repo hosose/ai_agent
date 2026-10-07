@@ -30,24 +30,24 @@ resource "aws_instance" "agent" {
   # 사용자 데이터 구성
   user_data = templatefile("${path.module}/../scripts/bootstrap.sh", {
     # 원천 소스가 저장되어 있는 버킷
-    source_bucket           = aws_s3_bucket.deploy.bucket
+    source_bucket = aws_s3_bucket.deploy.bucket
     # 다운로드할 소스(압축파일)의 key값
-    source_key              = aws_s3_object.source.key
+    source_key = aws_s3_object.source.key
     # 리전
-    aws_region              = var.aws_region
+    aws_region = var.aws_region
     # DB 접속 URL (동적 생성)
-    database_url_parameter  = aws_ssm_parameter.database_url.name
-    chat_model              = var.bedrock_chat_model
-    embed_model             = var.bedrock_embed_model
+    database_url_parameter = aws_ssm_parameter.database_url.name
+    chat_model             = var.bedrock_chat_model
+    embed_model            = var.bedrock_embed_model
     # 임시용, 사용자 메모리를 위해서 고정-> 추후 삭제, 사용자가 로그인하면 사용자별로 제공
-    user_id                 = var.user_id
+    user_id = var.user_id
   })
 
   # EC2 루트 EBS 디스크 설정 -옵션
   root_block_device {
     volume_type = "gp3"
     # GB, GIB 단위, 루트 디스크 크기
-    volume_size = 12    
+    volume_size = 12
     # 볼륨 암호화
     encrypted = true
   }
@@ -55,11 +55,11 @@ resource "aws_instance" "agent" {
   # 메타데이터 서비스 보안 설정 -옵션
   metadata_options {
     http_endpoint = "enabled"
-    http_tokens = "required"
+    http_tokens   = "required"
   }
 
   # ec2 생성전 반드시 구성되어야할 리소스 명시
-  depends_on = [ 
+  depends_on = [
     aws_s3_object.source,
     aws_db_instance.postgres,
     aws_iam_role_policy.agent,
