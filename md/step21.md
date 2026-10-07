@@ -64,4 +64,18 @@ network.tf      : VPC 구성 (VPC->public subnet 2개 -> Route Table -> IGW -> �
                   EC2 public subnet 개방, RDS public subnet 배치되지만 EC2에서만 접근 제한
 
 security.tf     : 보안그룹 구성(방화벽등), ec2, rds
+
+rds.tf          : RDS + 백터디비 관련 구성
+                  비번자동생성, 접속URL 자동구성 => SSM에서 전달하도록  KMS에 저장 구조
+                  코드,tf 파일에 db 비번 x
+```
+
+# 인프라구성
+```
+# 초기화
+terraform init
+# 포멧팅
+terraform fmt
+# 유효성 검사
+terraform validate
 ```
