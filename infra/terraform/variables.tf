@@ -8,7 +8,7 @@ variable "aws_region" {
 variable "project_name" {
   description = "프로젝트별 구분값"
   type        = string
-  default     = "agent-de-ai-25"
+  default     = "agent-de-ai-30"
 }
 
 # VPC 대역
@@ -48,7 +48,7 @@ variable "db_instalce_class" {
   description = "RDS 인스턴스 유형"
   type        = string
   # 소형 스펙
-  default = "db.t4g.micro"
+  default = "db.t4g.small"
 }
 
 # PostgreSql 엔진 버전
@@ -76,7 +76,7 @@ variable "bedrock_embed_model" {
 variable "user_id" {
   description = "임시 사용자 ID"
   type        = string
-  default     = "demo-user-25"
+  default     = "demo-user-30"
 }
 
 # FastAPI(8000) 접속 IP cidr
