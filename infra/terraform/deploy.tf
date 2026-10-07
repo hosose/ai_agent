@@ -1,10 +1,19 @@
 # 현재 프로젝트 압축(ZIP) => S3 비공개 버킷 업로드
 
 # 버킷 생성시 이름에 랜덤 부여
-resource "random_id" "bucket_suffix" {  
+resource "random_id" "bucket_suffix" {
+    # 램덤값 크기
+    byte_length = 4
 }
 # 버킷 생성
 resource "aws_s3_bucket" "deploy" {  
+    # 버킷명이 매번 생성해도 중복 x (고유한 이름 가짐)
+    bucket = "${var.project_name}-deploy-${random_id.bucket_suffix.hex}"
+    # 버킷이 삭제될때 내부에 객체가 있어도 함께 삭제 할 것인가?
+    force_destroy = true
+    tags = {
+        Name = "${var.project_name}-deploy-s3"
+    }
 }
 # 버킷에 비공개 설정
 resource "aws_s3_bucket_public_access_block" "deploy" {  
