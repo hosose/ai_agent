@@ -72,6 +72,8 @@ rds.tf          : RDS + 백터디비 관련 구성
 deploy.tf       : 애플리케이션 배포
                   현대프로젝트=>ZIP압축=>비공개 s3 버킷 업로드
                   차후 bootstrap.sh이 ZIP을 내려 받아서 Docker Image 구성
+
+iam.tf          : ec2 role
 ```
 
 # 인프라구성
