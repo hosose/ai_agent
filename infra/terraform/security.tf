@@ -14,11 +14,20 @@ resource "aws_security_group" "ec2" {
     # 허용할 포트 범위, 마지막 포트
     to_port   = 8000
     # 허용 프로토콜
-    protocal  = "tcp"
+    protocol  = "tcp"
     # 접근 허용 가능한 IPv4 cidr -> 0.0.0.0/0
     cidr_blocks = [var.api_cidr]
   }
-  egress = {}
+  # 아웃바운드
+  egress = {
+    # 모든 포트 허용
+    from_port = 0
+    to_port   = 0
+    # 모든 프로토콜
+    protocol  = "-1"    
+    # 모든 IP로 아웃바운드 허가
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   tags = { 
     Name = "${var.project_name}-ec2-sg"
   }
@@ -36,12 +45,21 @@ resource "aws_security_group" "rds" {
     # 허용할 포트 범위, 마지막 포트
     to_port   = 5432
     # 허용 프로토콜
-    protocal  = "tcp"
+    protocol  = "tcp"
     # 접근 허용 가능한 특정 시크리티 그룹
     # 권한이 있는 리소스(ec2가 aws_security_group.ec2 그룹에 속함) 에서 접근 가능
     security_groups = [aws_security_group.ec2.id]
   }
-  egress = {}
+  # 아웃바운드
+  egress = {
+    # 모든 포트 허용
+    from_port = 0
+    to_port   = 0
+    # 모든 프로토콜
+    protocol  = "-1"    
+    # 모든 IP로 아웃바운드 허가
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   tags = { 
     Name = "${var.project_name}-rds-sg"
   }
