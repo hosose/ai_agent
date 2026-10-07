@@ -79,5 +79,16 @@ variable "user_id" {
   default = "demo-user-25"
 }
 
+# FastAPI(8000) 접속 IP cidr
+# 보안그룹에서 ingress에서 활용
+# 편의상 전체 개방
+variable "api_cidr" {
+  description = "FastAPI용 CIDR"
+  type = string
+  default = "0.0.0.0/0"
+}
+
+
+
 # SSH 관련 (키페어등)
 # SSH 접근 IP 대역 => 자기자신 IP
