@@ -5,3 +5,5 @@
 terraform.tfvars
 crash.log
 agent-source.zip
+plan-de-ai-07
+destroy-de-ai-07

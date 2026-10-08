@@ -3,3 +3,8 @@ provider "aws" {
   # 리전 설정
   region = var.aws_region
 }
+
+provider "aws" {
+  alias  = "deployment_source"
+  region = "us-east-1"
+}

@@ -34,7 +34,7 @@ resource "aws_subnet" "public" {
   # 10.30.1.0/24, 10.30.2.0/24 <- 서브넷의 각각 cidr 범위
   cidr_block = cidrsubnet(var.vpc_cidr, 8, count.index + 1)
   # 가용영역 -> 서브넷별로 다른 가용영역 배치
-  availability_zone = data.aws_availability_zones.available.names[count.index]
+  availability_zone = data.aws_availability_zones.available.names[count.index * 2]
   # public IP 자동할당 -> 인프라 구축되면 해당 http://IP:8000로 접속
   map_public_ip_on_launch = true
   # 식별 태그

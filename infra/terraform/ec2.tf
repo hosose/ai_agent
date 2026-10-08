@@ -56,6 +56,7 @@ resource "aws_instance" "agent" {
   metadata_options {
     http_endpoint = "enabled"
     http_tokens   = "required"
+    http_put_response_hop_limit = 2
   }
 
   # ec2 생성전 반드시 구성되어야할 리소스 명시

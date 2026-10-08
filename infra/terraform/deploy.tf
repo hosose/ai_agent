@@ -7,6 +7,7 @@ resource "random_id" "bucket_suffix" {
 }
 # 버킷 생성
 resource "aws_s3_bucket" "deploy" {
+  provider = aws.deployment_source
   # 버킷명이 매번 생성해도 중복 x (고유한 이름 가짐)
   bucket = "${var.project_name}-deploy-${random_id.bucket_suffix.hex}"
   # 버킷이 삭제될때 내부에 객체가 있어도 함께 삭제 할 것인가?
@@ -17,6 +18,7 @@ resource "aws_s3_bucket" "deploy" {
 }
 # 버킷에 비공개 설정
 resource "aws_s3_bucket_public_access_block" "deploy" {
+  provider = aws.deployment_source
   # 버킷 지정
   bucket = aws_s3_bucket.deploy.id
   # 엑세스 설정 -> 모두 차단
@@ -27,6 +29,7 @@ resource "aws_s3_bucket_public_access_block" "deploy" {
 }
 # 버킷에 업로드될 리소스 암호화 처리
 resource "aws_s3_bucket_server_side_encryption_configuration" "deploy" {
+  provider = aws.deployment_source
   bucket = aws_s3_bucket.deploy.id
   # s3 서버측 암호화 규칙 정의
   rule {
@@ -48,6 +51,10 @@ data "archive_file" "source" {
   excludes = [
     ".git",
     ".env",
+    "agent",
+    ".uv-cache",
+    "infra/terraform/plan-de-ai-07",
+    "infra/terraform/destroy-de-ai-07",
     "__pycache__",
     "infra/terraform/.terraform",
     "infra/terraform/.terraform-build",
@@ -59,6 +66,7 @@ data "archive_file" "source" {
 }
 # 버킷에 zip 파일 업로드
 resource "aws_s3_object" "source" {
+  provider = aws.deployment_source
   # 업로드할 버킷
   bucket = aws_s3_bucket.deploy.id
   # key -> 파일명에 해시값을 적용하여 변화감지
